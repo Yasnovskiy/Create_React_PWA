@@ -52,6 +52,7 @@ export function register(config?: Config) {
       } else {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
+        console.log('swUrl', swUrl);
       }
     });
   }
@@ -61,6 +62,7 @@ function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      console.log('registration', registration);
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
