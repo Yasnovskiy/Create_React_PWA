@@ -9,6 +9,19 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
+const staticAssets = [
+  './',
+  './index.html',
+  './images/icons/icon-128x128.png',
+  './images/icons/icon-192x192.png',
+  './offline.html',
+  './css/main.css',
+  './js/app.js',
+  './js/main.js',
+  './images/no-image.jpg'
+];
+
+const staticCacheName = 'static-cache-v0';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -68,12 +81,15 @@ function registerValidSW(swUrl: string, config?: Config) {
         if (installingWorker == null) {
           return;
         }
-        installingWorker.onstatechange = () => {
+        installingWorker.onstatechange = async () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
+
+              const cache = await caches.open(staticCacheName);
+              cache.addAll(staticAssets);
               console.log(
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
