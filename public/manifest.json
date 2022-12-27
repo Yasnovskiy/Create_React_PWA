@@ -21,6 +21,7 @@
       "purpose": "any maskable"
     }
   ],
+  "scope": "/",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff"
